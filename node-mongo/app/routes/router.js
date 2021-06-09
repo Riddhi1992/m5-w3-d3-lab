@@ -1,11 +1,11 @@
-const inventories = require('../controllers/controllers')
+const lists = require('../controllers/controllers')
 
 const router = (app) => {
-    app.post('/api/book', inventories.createBook)
-    app.get('/api/book/:id', inventories.getBook)
-    app.get('/api/books', inventories.books)
-    app.put('/api/book', inventories.updateBook)
-    app.delete('/api/book/:id', inventories.deleteBook)
+    app.post('/api/list', lists.createList)
+    app.get('/api/list/:id', lists.getList)
+    app.get('/api/lists', lists.lists)
+    app.put('/api/list', lists.updateList)
+    app.delete('/api/list/:id', lists.deleteList)
 }
 
 module.exports = router

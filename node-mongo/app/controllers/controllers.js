@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false)
-const Book = mongoose.model('Book');
+const Book = mongoose.model('Books');
 
-const createBook = async (req, res) => {
-    const {id, title, author} = req.body
-    const book = new Book({id, title, author})
+const createList = async (req, res) => {
+    const {title, author} = req.body
+    const book = new Book({title, author})
     // Save Inventory in the MongoDB
     book.save()
         .then((data) => {
@@ -18,7 +18,7 @@ const createBook = async (req, res) => {
         })
 }
 
-const getBook = async (req, res) => {
+const getList = async (req, res) => {
     const {id} = req.params
     Book.findById(id)
         .select('-__v')
@@ -39,7 +39,7 @@ const getBook = async (req, res) => {
         })
 }
 
-const books = async (req, res) => {
+const lists = async (req, res) => {
     Book.find()
         .select('-__v')
         .then((books) => {
@@ -55,7 +55,7 @@ const books = async (req, res) => {
         })
 }
 
-const deleteBook = async (req, res) => {
+const deleteList = async (req, res) => {
     const {id} = req.params
     Book.findByIdAndDelete(id)
         .select('-__v-_id')
@@ -75,7 +75,7 @@ const deleteBook = async (req, res) => {
         })
 }
 
-const updateBook = async (req, res) => {
+const updateList = async (req, res) => {
     const {id, title, author} = req.body
     // Find Inventory and update it
     Book.findByIdAndUpdate(id, {id, title, author}, {new: false})
@@ -99,9 +99,9 @@ const updateBook = async (req, res) => {
 }
 
 module.exports = {
-    createBook,
-    getBook,
-    books,
-    updateBook,
-    deleteBook
+    createList,
+    getList,
+    lists,
+    updateList,
+    deleteList
 }
